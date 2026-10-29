@@ -41,6 +41,9 @@ Claude Code 为 `~/.claude/skills/`。具体以宿主文档为准——不同宿
 让 AI 把一条 GB/T 7714 格式的文献条目改成《考古》体例，看输出是否符合
 `作者：《篇名》，《刊名》年份年第X期。`。
 
+想知道它在你机器上到底能不能用？按 [`docs/verify.md`](docs/verify.md) 的五步验收走一遍：
+凭据探测、校验器正反双向自检、端到端跑一篇、内容抽样、记录结果。
+
 ## 使用前请知道的边界
 
 1. **《考古》体例是归纳结果，不是官方文件。** `kaogu-citation-format` 的规则由 2012—2026 年该刊
@@ -73,7 +76,9 @@ skills/
     scripts/check_notes.ps1    # 校验（PowerShell 版，无 Python 环境用）
     assets/obsidian-template.md
     examples/河湾遗址新石器时代早中期聚落形态的初步分析.md
+    tests/fixtures/故意写坏的测试笔记.md  # 校验器的反向测试样本（必须被判 FAIL）
 docs/quickstart.md
+docs/verify.md
 ```
 
 ## 四个 skill 如何串起来
