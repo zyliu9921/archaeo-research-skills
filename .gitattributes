@@ -1,0 +1,4 @@
+# 统一换行，避免 Windows 用户提交时整文件 CRLF 差异
+* text=auto eol=lf
+*.ps1 text eol=crlf
+*.png binary

@@ -1,0 +1,28 @@
+# 中间产物
+.dpn_work/
+*.tmp
+*.tmpdir/
+
+# Obsidian 本地配置与缓存
+.obsidian/workspace*.json
+.obsidian/cache
+.trash/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# 文献与转换产物（体积大，且多数有版权，不入库）
+*.pdf
+*.caj
+阅读文献/
+阅读文献 markdown/
+笔记/
+images/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
