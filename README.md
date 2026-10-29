@@ -24,7 +24,9 @@ conversion via MinerU, and structured Obsidian reading notes. Prompt packs, not 
 
 ## 安装
 
-把需要的目录整个复制到宿主的 skills 目录：
+完整说明（三种安装方式、各宿主目录、软链接更新、卸载、依赖检查）见 [`docs/install.md`](docs/install.md)。
+
+最短路径：把需要的目录整个复制到宿主的 skills 目录：
 
 ```bash
 # 例：只装翻译与引文格式
@@ -78,6 +80,7 @@ skills/
     examples/河湾遗址新石器时代早中期聚落形态的初步分析.md
     tests/fixtures/故意写坏的测试笔记.md  # 校验器的反向测试样本（必须被判 FAIL）
 docs/quickstart.md
+docs/install.md
 docs/verify.md
 ```
 
