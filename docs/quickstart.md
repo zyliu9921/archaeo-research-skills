@@ -19,6 +19,11 @@
 ## 场景三：一批 PDF 转成 Markdown
 
 1. 装 `mineru-pdf-to-markdown`，并准备好 MinerU 的访问方式（官方 API key 或本地 CLI）。
+   用官方 API 时要先把 token 放进环境变量，脚本与 skill 都不该出现明文 key：
+
+   ```powershell
+   setx MINERU_API_KEY "在 https://mineru.net 申请的 token"   # 重开终端后生效
+   ```
 2. 目录约定：
 
    ```

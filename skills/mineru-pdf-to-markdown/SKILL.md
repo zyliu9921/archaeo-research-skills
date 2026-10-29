@@ -19,6 +19,33 @@ description: 用 MinerU 把一批 PDF（尤其中文考古、历史类排版复�
 
 无论哪种方式，产物的目录结构都应包含 `full.md`（或等价的主 Markdown）与 `images/`。
 
+### 凭据放在哪里
+
+**不要把 API key 写进 SKILL.md、脚本或仓库。** 凭据属于使用者，skill 只声明「去哪个环境变量／配置项取」，这样整包可以直接公开分享。
+
+| 访问方式 | 凭据来源 | 说明 |
+|---|---|---|
+| 宿主插件（如 DeepSeek Harness） | 宿主凭据库，键名 `MINERU_API_KEY` | 插件配置里写的是**键名**不是值，实际值存于宿主的凭据文件（例如 `~/.dsh/.credentials.yaml`），不要写进 `cordis.patch.yml` |
+| 官方 API 直连 | 环境变量 `MINERU_API_KEY` | 在 https://mineru.net 的用户中心 → API 管理申请 token，然后设为系统环境变量：`setx MINERU_API_KEY "你的token"`（Windows，重开终端生效）或 `export MINERU_API_KEY=...`（bash） |
+| 本地 CLI / 自建服务 | 通常不需要 | 本地服务（如 `http://localhost:8000`）一般不校验 key，按该服务文档来 |
+
+配套的插件配置片段（DeepSeek Harness 为例，取自 `~/.dsh/profiles/<profile>/cordis.patch.yml`）：
+
+```yaml
+- id: dsh-pdf-mineru
+  config:
+    activeProvider: mp_official
+    providers:
+      - id: mp_official
+        type: official-v4
+        baseURL: https://mineru.net/api/v4
+        apiKeyEnv: MINERU_API_KEY   # 只写键名，值去凭据库／环境变量取
+```
+
+**泄露了怎么办**：立刻去控制台吊销该 token 并重新申请。公开仓库里出现过 key 的，改私密或删 commit 都不够——历史里仍有，必须吊销。
+
+本地若用 `.env` 存放 key，确认它在 `.gitignore` 里。
+
 ## 工作区约定
 
 ```
