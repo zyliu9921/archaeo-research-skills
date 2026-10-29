@@ -137,10 +137,40 @@ python .../check_notes.py --notes-dir 笔记 --status-tag "#阅读情况：待�
 
 1. 转 Markdown（`skills/mineru-pdf-to-markdown/SKILL.md`）
 2. 写笔记（`skills/literature-note-writer/SKILL.md`）
-3. 校验：
+3. 校验（在**仓库根目录**执行）：
 
 ```powershell
-python skills/literature-note-writer/scripts/check_notes.py --notes-dir <你的笔记目录>
+python skills/literature-note-writer/scripts/check_notes.py --notes-dir "你的笔记目录"
+```
+
+这行命令由四段组成，缺一不可：
+
+| 片段 | 含义 | 能不能改 |
+|---|---|---|
+| `python` | 用哪个解释器跑脚本 | 能。没有 Python 就换成下面的 PowerShell 版 |
+| `skills/literature-note-writer/scripts/check_notes.py` | 脚本文件的位置，相对于仓库根目录 | 能，改成你实际存放的绝对路径 |
+| `--notes-dir` | 参数名：告诉脚本「要检查哪个文件夹」 | 不能，名字写死 |
+| `"你的笔记目录"` | 参数值，**这是占位符，必须换成你机器上的真实路径** | 必须改 |
+
+`<你的笔记目录>` 这种尖括号写法是文档里的通用占位符，**不要照抄**，直接把整段（含尖括号）替换成路径，路径带空格时加引号。
+
+三种真实写法：
+
+```powershell
+# 笔记和仓库在同一层目录
+python skills/literature-note-writer/scripts/check_notes.py --notes-dir "../笔记"
+
+# 笔记本体在别的盘（Windows 反斜杠，整条路径加引号）
+python skills/literature-note-writer/scripts/check_notes.py --notes-dir "E:\硕士论文\obsidian笔记\笔记"
+
+# 用绝对路径指向任意位置
+python C:\tools\archaeo-research-skills\skills\literature-note-writer\scripts\check_notes.py --notes-dir "D:\vault\笔记"
+```
+
+没有可用的 Python 时（Windows 上 `python` 常是 Microsoft Store 的占位程序，跑了静默退出、什么都不输出），换 PowerShell 版，参数一一对应：
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File skills/literature-note-writer/scripts/check_notes.ps1 -NotesDir "你的笔记目录"
 ```
 
 期望 `COUNT=1 BAD=0`。
