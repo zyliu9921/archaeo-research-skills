@@ -9,10 +9,28 @@ description: 用 MinerU 把一批 PDF（尤其中文考古、历史类排版复�
 
 ## 第 0 步：先确认凭据，再动手（缺就停下来问）
 
-**在提交任何一个 PDF 之前**，先按顺序确认这一批活有没有可用的访问方式：
+**在提交任何一个 PDF 之前**，先跑探测脚本，不要凭印象判断：
 
-1. 宿主是否已装 MinerU 插件？（有则凭据由宿主管理，跳到第 2 步）
-2. 官方 API：检查环境变量是否存在，**只看有没有，不打印值**：
+```powershell
+powershell -File scripts/check_env.ps1          # Windows
+```
+
+```bash
+bash scripts/check_env.sh                       # macOS / Linux
+```
+
+脚本输出三类结果：
+
+- `[1] 环境变量 MINERU_API_KEY`：`ok` 或 `missing`（只报长度，不回显值）；
+- `[2] 本地服务 127.0.0.1:8000 / 18000`：`reachable` 或 `closed`；
+- `[3] 宿主插件`：永远是 `unknown`——脚本读不到宿主的插件配置，这一项必须人工确认。
+
+末行 `VERDICT: usable` 表示至少有一条路能用，继续；`VERDICT: no-path` 表示三条都不成立，**按下面的格式停下来问人**。
+
+脚本判定不了的情况下，再按顺序人工确认：
+
+1. 宿主是否已装 MinerU 插件？（有则凭据由宿主管理，跳过下面的环境变量检查）
+2. 官方 API：环境变量是否存在，**只看有没有，不打印值**：
 
    ```powershell
    if ($env:MINERU_API_KEY) { "ok" } else { "missing" }

@@ -65,6 +65,8 @@ skills/
   mineru-pdf-to-markdown/      # PDF → Markdown
     SKILL.md
     scripts/mineru_export.ps1
+    scripts/check_env.ps1      # 凭据探测（Windows）
+    scripts/check_env.sh       # 凭据探测（macOS/Linux）
   literature-note-writer/      # 八节精读笔记
     SKILL.md
     scripts/check_notes.py     # 校验（Python 3，仅标准库）
